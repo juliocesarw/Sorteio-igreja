@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Filtros de relevo e profundidade -->
+    <filter id="soft-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#000" flood-opacity="0.45" />
+    </filter>
+
+    <linearGradient id="extrude-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b30000" />
+      <stop offset="60%" stop-color="#800000" />
+      <stop offset="100%" stop-color="#4a0000" />
+    </linearGradient>
+
+    <linearGradient id="yellow-border" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffee55" />
+      <stop offset="100%" stop-color="#ff9900" />
+    </linearGradient>
+
+    <linearGradient id="text-shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="85%" stop-color="#f2f2f5" />
+      <stop offset="100%" stop-color="#dcdde3" />
+    </linearGradient>
+
+    <!-- Estilo de tipografia arredondada cartoon -->
+    <style>
+      .font-base {
+        font-family: "Arial Rounded MT Bold", "Nunito", "Montserrat", "Comic Sans MS", sans-serif;
+        font-weight: 900;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <g transform="translate(400, 305) rotate(-6)" filter="url(#soft-shadow)">
+    <!-- CAMADA 1: Extrusão 3D Inferior (Bloco Vermelho/Sombra 3D) -->
+    <g fill="none" stroke="url(#extrude-grad)" stroke-linejoin="round">
+      <text class="font-base" x="0" y="-35" font-size="140" stroke-width="70">Bom de</text>
+      <text class="font-base" x="0" y="115" font-size="155" stroke-width="70">Lição</text>
+
+      <text class="font-base" x="0" y="-45" font-size="140" stroke-width="64">Bom de</text>
+      <text class="font-base" x="0" y="105" font-size="155" stroke-width="64">Lição</text>
+    </g>
+
+    <!-- CAMADA 2: Contorno Laranja Vibrante -->
+    <g fill="none" stroke="#e62200" stroke-width="50" stroke-linejoin="round">
+      <text class="font-base" x="0" y="-55" font-size="140">Bom de</text>
+      <text class="font-base" x="0" y="95" font-size="155">Lição</text>
+    </g>
+
+    <!-- CAMADA 3: Borda Amarela Externa -->
+    <g fill="none" stroke="url(#yellow-border)" stroke-width="36" stroke-linejoin="round">
+      <text class="font-base" x="0" y="-55" font-size="140">Bom de</text>
+      <text class="font-base" x="0" y="95" font-size="155">Lição</text>
+    </g>
+
+    <!-- CAMADA 4: Borda Vermelha Interna de Separação -->
+    <g fill="none" stroke="#d61b00" stroke-width="26" stroke-linejoin="round">
+      <text class="font-base" x="0" y="-55" font-size="140">Bom de</text>
+      <text class="font-base" x="0" y="95" font-size="155">Lição</text>
+    </g>
+
+    <!-- CAMADA 5: Contorno Preto de Destaque das Letras -->
+    <g fill="none" stroke="#111111" stroke-width="16" stroke-linejoin="round">
+      <text class="font-base" x="0" y="-55" font-size="140">Bom de</text>
+      <text class="font-base" x="0" y="95" font-size="155">Lição</text>
+    </g>
+
+    <!-- CAMADA 6: Preenchimento Branco das Letras (Brilho Superior) -->
+    <g fill="url(#text-shine)">
+      <text class="font-base" x="0" y="-55" font-size="140">Bom de</text>
+      <text class="font-base" x="0" y="95" font-size="155">Lição</text>
+    </g>
+  </g>
+</svg>

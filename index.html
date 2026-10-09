@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sorteio de participantes do Bom de Lição." />
+    <title>Bom de Lição | Sorteio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="manage-view" class="manage-view">
+    <main class="page-shell">
+      <header class="site-header">
+        <div class="brand">
+          <img class="brand-logo" src="img/bom-de-licao.svg" alt="Bom de Lição" />
+          <span class="brand-divider" aria-hidden="true"></span>
+          <img class="sabbath-logo" src="img/escola-sabatina-logo-png.png" alt="Escola Sabatina" />
+        </div>
+        <p class="eyebrow">Escola Sabatina</p>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="kicker">Momento especial · Escola Sabatina</p>
+        <h1 id="page-title">Sorteio do Bom de Lição</h1>
+        <p>Celebre a participação e descubra os premiados deste sábado.</p>
+      </section>
+
+      <section class="dashboard" aria-label="Painel do sorteio">
+        <article class="draw-card">
+          <div class="counter-row" aria-live="polite">
+            <div class="counter"><span>Disponíveis</span><strong id="available-count">8</strong></div>
+            <div class="counter"><span>Sorteados</span><strong id="drawn-count">0</strong></div>
+          </div>
+
+          <div class="result-area" aria-live="polite" aria-atomic="true">
+            <p class="result-label">Último premiado</p>
+            <p id="result-name" class="result-name">Pronto para começar</p>
+            <p id="result-support" class="result-support">Entre na tela do sorteio para revelar o premiado deste sábado.</p>
+          </div>
+
+          <button id="go-draw-button" class="button button-primary button-hero" type="button">
+            <span aria-hidden="true">✦</span> Ir para o sorteio
+          </button>
+          <button id="reset-button" class="button button-text" type="button">Reiniciar sorteio</button>
+          <p id="status-message" class="status-message" role="status"></p>
+        </article>
+
+        <aside class="manage-card" aria-labelledby="manage-title">
+          <div class="panel-heading">
+            <div>
+              <p class="kicker">Participantes</p>
+              <h2 id="manage-title">Lista disponível</h2>
+            </div>
+            <span id="available-pill" class="pill">8 pessoas</span>
+          </div>
+
+          <form id="add-form" class="add-form" novalidate>
+            <label class="sr-only" for="participant-name">Nome do participante</label>
+            <input id="participant-name" name="participant-name" type="text" maxlength="60" placeholder="Adicionar participante" autocomplete="off" />
+            <button class="button button-add" type="submit" aria-label="Adicionar participante">Adicionar</button>
+          </form>
+          <p id="form-message" class="form-message" role="alert"></p>
+
+          <ul id="available-list" class="name-list" aria-label="Participantes disponíveis"></ul>
+        </aside>
+      </section>
+
+      <section class="history-card" aria-labelledby="history-title">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Acompanhamento</p>
+            <h2 id="history-title">Já foram sorteados</h2>
+          </div>
+          <span class="history-note">Na ordem do sorteio</span>
+        </div>
+        <ol id="history-list" class="history-list" aria-label="Histórico de participantes sorteados"></ol>
+        <p id="empty-history" class="empty-state">Nenhum participante foi sorteado ainda.</p>
+      </section>
+    </main>
+    <footer>Bom de Lição · Uma atividade da Escola Sabatina</footer>
+    </div>
+
+    <section id="draw-screen" class="draw-screen" data-phase="idle" aria-labelledby="draw-title" aria-hidden="true" inert>
+      <div class="ds-bg" aria-hidden="true"></div>
+      <div class="ds-vignette" aria-hidden="true"></div>
+      <canvas id="fx-canvas" class="ds-canvas" aria-hidden="true"></canvas>
+
+      <header class="ds-top">
+        <button id="back-button" class="ghost-button" type="button"><span aria-hidden="true">←</span> Gerenciar</button>
+        <div class="ds-logos">
+          <img src="img/bom-de-licao.svg" alt="Bom de Lição" />
+          <span class="ds-logos-divider" aria-hidden="true"></span>
+          <img class="ds-logo-es" src="img/escola-sabatina-logo-png.png" alt="Escola Sabatina" />
+        </div>
+        <div class="ds-tools">
+          <button id="sound-toggle" class="ghost-button" type="button" aria-pressed="false"><span id="sound-icon" aria-hidden="true">🔇</span> <span id="sound-label">Som desligado</span></button>
+          <button id="draw-reset-button" class="ghost-button" type="button">Reiniciar</button>
+        </div>
+      </header>
+
+      <div id="ds-main" class="ds-main">
+        <p class="ds-kicker">Momento especial · Escola Sabatina</p>
+        <h1 id="draw-title" class="ds-title">Quem será o premiado do bom de lição?</h1>
+
+        <div id="stage" class="stage">
+          <div class="halo" id="halo" aria-hidden="true"></div>
+          <div class="rays" id="rays" aria-hidden="true"></div>
+          <span class="shock" aria-hidden="true"></span>
+          <span class="shock" aria-hidden="true"></span>
+
+          <!-- Cartão da Roleta de Sorteio -->
+          <div class="raffle-card" id="raffle-card">
+            <div class="raffle-card-glow" aria-hidden="true"></div>
+            <div class="raffle-badge" id="raffle-badge">
+              <span class="badge-icon">⭐</span>
+              <span class="badge-text" id="badge-text">Sorteio Bom de Lição</span>
+            </div>
+            
+            <div class="raffle-display" id="raffle-display">
+              <div class="raffle-roller" id="raffle-roller">
+                <span class="roller-icon" id="roller-icon" aria-hidden="true">🎁</span>
+                <p class="roller-name" id="roller-name">Pronto para começar</p>
+              </div>
+            </div>
+
+            <div class="raffle-card-foot" id="raffle-card-foot">
+              <span class="foot-dots" aria-hidden="true">✦ ✦ ✦</span>
+            </div>
+          </div>
+
+          <!-- Revelação do Premiado -->
+          <div class="winner" id="winner" aria-hidden="true">
+            <div class="winner-trophy" aria-hidden="true">🏆</div>
+            <p class="winner-tag">Premiado deste sábado</p>
+            <p class="winner-name" id="winner-name"></p>
+            <p class="winner-congrats" id="winner-congrats">Parabéns pela participação!</p>
+          </div>
+        </div>
+
+        <p id="ds-message" class="ds-message">Toque no botão e acompanhe o sorteio de hoje.</p>
+
+        <div class="ds-actions">
+          <button id="draw-button" class="btn-hero" type="button">✦ Sortear participante</button>
+          <button id="exit-button" class="ghost-button ghost-solid" type="button" hidden>Voltar à tela principal</button>
+        </div>
+        <p class="ds-remaining" aria-live="polite"><strong id="remaining-count">8</strong> <span id="remaining-label">participantes restantes</span></p>
+        <p id="draw-live" class="sr-only" role="status" aria-live="polite"></p>
+      </div>
+
+      <div id="ds-sweep" class="ds-sweep" aria-hidden="true"></div>
+      <div id="ds-flash" class="ds-flash" aria-hidden="true"></div>
+    </section>
+
+    <script src="effects.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
