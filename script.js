@@ -2,7 +2,7 @@
 
 // Esta é a fonte imutável do estado. Todas as interações usam cópias em memória.
 const ORIGINAL_PARTICIPANTS = Object.freeze([
-  "Washington", "Lislane", "Naiara", "Aparecida", "Júlio César", "Anne Tonon", "Keilane", "Sthéfany"
+  "Washington", "Lislane", "Naiara", "Aparecida", "Júlio César", "Anne Tonon", "Keilane", "Sthéfany", "Anderson Cesário"
 ]);
 
 let availableParticipants = [...ORIGINAL_PARTICIPANTS];
